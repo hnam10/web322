@@ -5,12 +5,20 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "tailwindcss -i ./public/css/main.css  -o ./public/css/main.css --watch"
+
   },
   "author": "Hansol Nam",
   "license": "ISC",
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "daisyui": "^4.12.13",
     "express": "^4.21.0"
-    
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13",
+    "daisyui": "^2.51.0"
+
   }
 }
