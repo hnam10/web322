@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* Ensure dropdown is on top */
+    .dropdown-content {
+      z-index: 9999; /* High z-index to stay on top */
+      position: absolute; /* Absolute positioning */
+    }
+
+    /* Ensure navbar stays on top of everything */
+    .navbar {
+      position: relative;
+      z-index: 50;
+    }
+
+    /* Ensure hero section doesn't overlap with the navbar */
+    .hero {
+      position: relative;
+      z-index: 1;
+    }
+    html, body {
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+  }
+  </style>
+  <title>About - Lego Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body class="bg-base-200">
+
+  <!-- Navbar -->
+  <nav class="navbar bg-base-100 shadow-lg">
+    <div class="navbar-start">
+      <a href="/" class="text-2xl font-bold text-primary">Lego Collection</a>
+    </div>
+    <div class="navbar-center space-x-4">
+      <a href="/about" class="btn btn-ghost active">About</a>
+      <div class="dropdown">
+        <label tabindex="0" class="btn btn-accent">Theme</label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 space-y-2">
+          <li><a href="/lego/sets?theme=technic">Technic</a></li>
+          <li><a href="/lego/sets?theme=star-wars">Star Wars</a></li>
+          <li><a href="/lego/sets?theme=city">City</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero bg-green-500 text-white p-10">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">All About Me</h1>
+      </div>
+    </div>
+  </div>
+  <div class="columns-2 md:columns-3">
+  <!-- Two Column Layout with Distinct Background Colors -->
+  <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+    <!-- Left Column: Image with Background -->
+    <div class="left-column p-6 rounded-lg flex justify-center">
+      <img 
+        src="https://extraextrabricks.com/userdata/public/gfx/13142/LEGO-City-Minifigure---Little-Girl--Child%2C-ginger-hair%2C-pigtails%2C-pink-hoodie.jpg" 
+        alt="About Me" 
+        class="rounded-lg object-cover max-w-full h-auto" 
+      />
+    </div>
+
+    <!-- Right Column: Text with Background -->
+    <div class="right-column p-6 rounded-lg flex items-center">
+      <div>
+        <p class="mb-4">
+          Hi! I'm Hansol, a student studying programming and exploring creative hobbies like Lego building.
+        </p>
+        <p>
+          In my free time, I enjoy drawing, planting, and watching mechanical keyboard reviews. 
+          I also love customizing keyboards to match my style.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
