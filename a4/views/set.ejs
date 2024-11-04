@@ -56,7 +56,7 @@
 <!-- AJAX Script for Quote -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    fetch("https://quotable.io/random")
+    fetch("http://quotable.io/random")
       .then(response => response.json())
       .then(data => {
         document.getElementById("quote-content").innerText = data.content;
