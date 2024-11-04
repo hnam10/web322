@@ -1714,11 +1714,10 @@ html {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-  .text-purple-700 {
-    color: #6B21A8; /* Tailwind의 purple-600 색상 코드 */
-  }
-
-
+.text-purple-700 {
+  color: #6B21A8;
+  /* Tailwind의 purple-600 색상 코드 */
+}
 
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
