@@ -114,7 +114,7 @@ app.post('/lego/updateSet/:setNum', async (req, res) => {
   }
 });
 
-// Delete a LEGO set (GET 요청으로 변경)
+// Delete a LEGO set (GET 요청으로 변경)12340-1234
 app.get('/lego/deleteSet/:setNum', async (req, res) => {
   try {
     await legoData.deleteSet(req.params.setNum);
