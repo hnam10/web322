@@ -39,11 +39,9 @@
         <p><strong>Number of Parts:</strong> <%= set.num_parts %></p>
       </div>
 
-      <!-- Edit and Delete Buttons -->
+      <!-- Edit  Buttons -->
       <div class="mt-6">
         <a href="/lego/editSet/<%= set.set_num %>" class="btn btn-success">Edit Set</a>
-        <form action="/lego/deleteSet/<%= set.set_num %>" method="POST" style="display: inline;">
-          <button type="submit" class="btn btn-error">Delete Set</button>
         </form>
       </div>
     </div>
