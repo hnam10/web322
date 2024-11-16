@@ -60,26 +60,26 @@ const Set = sequelize.define('Set', {
 // 테이블 관계 설정
 Set.belongsTo(Theme, { foreignKey: 'theme_id' });
 
-// // 기존 데이터 삽입 (bulkCreate)
-// const setData = require('../data/setData');
-// const themeData = require('../data/themeData');
+// 기존 데이터 삽입 (bulkCreate)
+const setData = require('../data/setData');
+const themeData = require('../data/themeData');
 
-// sequelize.sync()
-//   .then(async () => {
-//     try {
-//       await Theme.bulkCreate(themeData);
-//       await Set.bulkCreate(setData);
-//       console.log("-----");
-//       console.log("data inserted successfully");
-//     } catch (err) {
-//       console.log("-----");
-//       console.log(err.message);
-//     }
-//     process.exit();
-//   })
-//   .catch((err) => {
-//     console.log('Unable to connect to the database:', err);
-//   });
+sequelize.sync()
+  .then(async () => {
+    try {
+      await Theme.bulkCreate(themeData);
+      await Set.bulkCreate(setData);
+      console.log("-----");
+      console.log("data inserted successfully");
+    } catch (err) {
+      console.log("-----");
+      console.log(err.message);
+    }
+    process.exit();
+  })
+  .catch((err) => {
+    console.log('Unable to connect to the database:', err);
+  });
 
 // 데이터베이스 초기화 함수
 async function initialize() {
