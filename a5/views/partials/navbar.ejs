@@ -1,0 +1,11 @@
+<!-- navbar.ejs -->
+<nav class="navbar bg-white shadow-lg">
+  <div class="navbar-start">
+    <a href="/" class="text-2xl font-bold text-primary">Lego Collection</a>
+  </div>
+  <div class="navbar-center">
+    <a href="/lego/sets" class="btn <%= (page === '/lego/sets') ? 'active' : '' %>">View Collection</a>
+    <a href="/about" class="btn <%= (page === '/about') ? 'active' : '' %>">About</a>
+    <li><a class="<%= (page == "/lego/addSet") ? 'active' : '' %>" href="/lego/addSet">Add to Collection</a></li>
+  </div>
+</nav>
