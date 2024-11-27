@@ -82,10 +82,26 @@ Set.belongsTo(Theme, { foreignKey: 'theme_id' });
 //   });
 
 // 데이터베이스 초기화 함수
-async function initialize() {
-  console.log("Initializing LEGO data...");
+function initialize() {
+  return new Promise((resolve, reject) => {
+    console.log("Starting LEGO data initialization...");
 
-  return await sequelize.sync();
+    try {
+      // 데이터 초기화 작업 (예: DB 연결 및 데이터 로드)
+      console.log("Simulating LEGO data loading...");
+      sequelize.sync();
+
+      // resolve(); 를 호출하여 초기화 완료 시 성공
+      resolve();
+
+      // 만약 reject()를 호출할 경우, 초기화 실패 처리
+      // reject("Initialization failed intentionally for testing");
+    } catch (error) {
+      console.error("Error in LEGO data initialization:", error);
+      reject(error);
+    }
+  });
+
 }
 
 // 기존 함수 리팩터링 (getAllSets, getSetByNum 등)
