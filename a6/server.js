@@ -52,12 +52,14 @@ function ensureLogin(req, res, next) {
 legoData.initialize()
   .then(() => {
     console.log("LEGO data initialized successfully");
-    return authData.initialize(); // auth-service 초기화
-  })
-  .then(() => {
-    console.log("Auth-service initialized successfully");
-    app.listen(PORT, () => {
-      console.log(`Server is running at http://localhost:${PORT}`);
+    authData.initialize().then(()=> {
+      console.log("Auth-service initialized successfully");
+      app.listen(PORT, () => {
+        console.log(`Server is running at http://localhost:${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error(`Unable to start server: ${err}`);
     });
   })
   .catch((err) => {
