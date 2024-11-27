@@ -43,6 +43,7 @@ function initialize() {
     
 }catch(error){
 console.log
+reject(error);
 }
     });
 }
