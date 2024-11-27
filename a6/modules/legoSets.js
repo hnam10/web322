@@ -85,7 +85,7 @@ Set.belongsTo(Theme, { foreignKey: 'theme_id' });
 async function initialize() {
   console.log("Initializing LEGO data...");
 
-  return sequelize.sync();
+  return await sequelize.sync();
 }
 
 // 기존 함수 리팩터링 (getAllSets, getSetByNum 등)
