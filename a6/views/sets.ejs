@@ -14,19 +14,24 @@
     <%- include('partials/navbar', { page: "/lego/sets" }) %>
 
         <!-- Hero -->
-       
-       
-    
-                <div class="hero bg-green-500 text-purple-700 p-10">
-                    <div class="hero-content text-center">
+
+
+
+        <div class="hero bg-green-500 text-purple-700 p-10">
+            <div class="hero-content text-center">
                 <div class="max-w-md">
                     <h1 class="text-5xl font-bold">Collection</h1>
-                    <p class="py-6 text-purple-600">Browse the entire collection. Click the theme to filter by themes such as :</p>
+                    <p class="py-6 text-purple-600">Browse the entire collection. Click the theme to filter by themes
+                        such as :</p>
 
                     <div class="flex gap-4 justify-center">
-                        <a href="/lego/sets?theme=technic" class="btn bg-gray-800 text-white font-bold px-4 py-2 rounded-full hover:bg-gray-900">Technic</a>
-                        <a href="/lego/sets?theme=star-wars" class="btn bg-gray-800 text-white font-bold px-4 py-2 rounded-full hover:bg-gray-900">Star Wars</a>
-                        <a href="/lego/sets?theme=city" class="btn bg-gray-800 text-white font-bold px-4 py-2 rounded-full hover:bg-gray-900">City</a>
+                        <a href="/lego/sets?theme=technic"
+                            class="btn bg-gray-800 text-white font-bold px-4 py-2 rounded-full hover:bg-gray-900">Technic</a>
+                        <a href="/lego/sets?theme=star-wars"
+                            class="btn bg-gray-800 text-white font-bold px-4 py-2 rounded-full hover:bg-gray-900">Star
+                            Wars</a>
+                        <a href="/lego/sets?theme=city"
+                            class="btn bg-gray-800 text-white font-bold px-4 py-2 rounded-full hover:bg-gray-900">City</a>
                     </div>
 
                 </div>
@@ -67,7 +72,7 @@
                             <td class="p-4">
                                 <a href="/lego/sets/<%= set.set_num %>"
                                     class="btn btn-sm bg-gray-500 text-black border-gray-500">
-                                  Details
+                                    Details
                                 </a>
                         </tr>
                         <% }) %>

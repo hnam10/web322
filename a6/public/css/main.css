@@ -1590,6 +1590,7 @@ html {
 .grid {
   display: grid;
 }
+
 .max-h-screen{
   max-height: 100%;
 }

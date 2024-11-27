@@ -14,7 +14,7 @@ const authData = require('./modules/auth-service'); // auth-service 모듈
 const clientSessions = require('client-sessions');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // 미들웨어 설정
 app.use(express.json());
