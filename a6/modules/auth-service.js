@@ -21,6 +21,8 @@ const userSchema = new mongoose.Schema({
 function initialize() {
     return new Promise((resolve, reject) => {
         // MongoDB 연결
+        console.log("Initializing Auth service...");
+
         const db = mongoose.createConnection(process.env.MONGODB, { useNewUrlParser: true, useUnifiedTopology: true });
 
         // 에러 처리

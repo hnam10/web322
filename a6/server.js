@@ -50,8 +50,12 @@ function ensureLogin(req, res, next) {
 
 // LEGO 데이터 초기화
 legoData.initialize()
-  .then(authData.initialize) // auth-service 초기화
   .then(() => {
+    console.log("LEGO data initialized successfully");
+    return authData.initialize(); // auth-service 초기화
+  })
+  .then(() => {
+    console.log("Auth-service initialized successfully");
     app.listen(PORT, () => {
       console.log(`Server is running at http://localhost:${PORT}`);
     });
@@ -59,7 +63,6 @@ legoData.initialize()
   .catch((err) => {
     console.error(`Unable to start server: ${err}`);
   });
-
 // Routes
 
 // Home Route
