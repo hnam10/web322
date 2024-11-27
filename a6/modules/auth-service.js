@@ -33,6 +33,7 @@ function initialize() {
         // 연결 성공 시 User 모델 초기화
         db.once('open', () => {
             User = db.model('users', userSchema);
+            console.log(User);
             resolve(); // 연결 성공 시 Promise resolve
         });
     });
@@ -53,11 +54,7 @@ function registerUser(userData) {
                 password: userData.password,
                 email: userData.email,
                 loginHistory: []
-            })   .catch(err => {
-                console.log(err);
-                reject(`There was an error encrypting the password`);
-                // Show any errors that occurred during the process
-            });
+            })  
 
             //save the user to the db
             newUser.save()
