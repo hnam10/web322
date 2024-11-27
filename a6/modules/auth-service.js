@@ -44,7 +44,7 @@ function registerUser(userData) {
 
         // bcrypt.hash(userData.password, 10).then(hash => { // Hash the password using a Salt that was generated using 10 rounds
         //     // TODO: Store the resulting "hash" value in the DB
-        
+
         //     // new user object
         //     const newUser = new User({
         //         userName: userData.userName,
@@ -52,7 +52,7 @@ function registerUser(userData) {
         //         email: userData.email,
         //         loginHistory: []
         //     });
-            bcrypt.hash(userData.password, 10)
+        bcrypt.hash(userData.password, 10)
             .then(hash => {
                 console.log("Hash generated successfully:", hash);
                 resolve(hash);
@@ -61,33 +61,33 @@ function registerUser(userData) {
                 console.error("Error while hashing password:", err);
                 reject("There was an error encrypting the password");
             });
-        
-            //save the user to the db
-            newUser.save()
-                .then(() => resolve('User registered successfully'))
-                .catch((err) => {
-                    if (err.code === 11000) {
-                        reject('User Name already taken'); // 중복된 사용자 이름
-                    } else {
-                        reject(`There was an error creating the user: ${err}`); // 기타 에러
-                    }
-                });
-        })
-            .catch(err => {
-                console.log(err);
-                reject(`There was an error encrypting the password`);
-                // Show any errors that occurred during the process
+
+        //save the user to the db
+        newUser.save()
+            .then(() => resolve('User registered successfully'))
+            .catch((err) => {
+                if (err.code === 11000) {
+                    reject('User Name already taken'); // 중복된 사용자 이름
+                } else {
+                    reject(`There was an error creating the user: ${err}`); // 기타 에러
+                }
             });
-    });
-
-
+    })
+        .catch(err => {
+            console.log(err);
+            reject(`There was an error encrypting the password`);
+            // Show any errors that occurred during the process
+        });
 }
+
+
+
 function checkUser(userData) {
     return new Promise((resolve, reject) => {
         // Find the user in the database by userName
         User.findOne({ userName: userData.userName })
-        // .exec()
-        .then((user) => {
+            // .exec()
+            .then((user) => {
                 if (!user) {
                     return reject(`Unable to find user: ${userData.userName}`);
                 }
