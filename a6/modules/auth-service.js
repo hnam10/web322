@@ -27,12 +27,7 @@ function initialize() {
             useUnifiedTopology: true,
         });
 
-        db.on('connected', () => console.log('connected'));
-db.on('open', () => console.log('open'));
-db.on('disconnected', () => console.log('disconnected'));
-db.on('reconnected', () => console.log('reconnected'));
-db.on('disconnecting', () => console.log('disconnecting'));
-db.on('close', () => console.log('close'))
+  
         // 에러 처리
         db.on('error', (err) => {
             console.error("MongoDB connection error:", err);
@@ -40,11 +35,11 @@ db.on('close', () => console.log('close'))
         });
 
         // 연결 성공 시 User 모델 초기화
-        // db.once('open', () => {
-        //     User = db.model('users', userSchema);
-        //     console.log("MongoDB connected successfully and User model initialized.");
-        //     resolve(); // 연결 성공 시 Promise resolve
-        // });
+        db.once('open', () => {
+            User = db.model('users', userSchema);
+            console.log("MongoDB connected successfully and User model initialized.");
+            resolve(); // 연결 성공 시 Promise resolve
+        });
     
 }catch(error){
 console.log
