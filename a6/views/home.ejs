@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Lego Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+  <style>
+    /* Ensure dropdown is on top */
+    .dropdown-content {
+      z-index: 9999; /* High z-index to stay on top */
+      position: absolute; /* Absolute positioning */
+    }
+
+    /* Ensure navbar stays on top of everything */
+    .navbar {
+      position: relative;
+      z-index: 50;
+    }
+
+    /* Ensure hero section doesn't overlap with the navbar */
+    .hero {
+      position: relative;
+      z-index: 1;
+    }
+    html, body {
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+  }
+  </style>
+
+</head>
+
+<style>
+  html, body {
+      height: 100%; /* 전체 높이를 설정 */
+      margin: 0; /* 기본 마진 제거 */
+  }
+
+  .hero-container {
+      min-height: 100%; /* 최소 높이를 전체 화면으로 설정 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 세로 중앙 정렬 */
+      align-items: center; /* 가로 중앙 정렬 */
+  }
+</style>
+
+<body class="bg-base-200">
+  <%- include('partials/navbar', {page: '/'}) %>
+
+
+  <!-- <nav class="navbar bg-base-100 shadow-lg">
+    <div class="navbar-start">
+      <a href="/" class="text-2xl font-bold text-primary">Lego Collection</a>
+    </div>
+    <div class="navbar-center">
+      <a href="/about" class="btn btn-ghost">About</a>
+      <div class="dropdown">
+        <label tabindex="0" class="btn btn-accent">Theme</label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a href="/lego/sets?theme=technic">Technic</a></li>
+          <li><a href="/lego/sets?theme=star-wars">Star Wars</a></li> <!--should drop error-->
+          <!-- <li><a href="/lego/sets?theme=city">City</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>  -->
+
+  <!-- Hero -->
+  <div class="hero text-purple-700 p-10">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Explore the World of Lego! 
+         
+        </h1>
+     
+        <br></br>
+        <a href="/lego/sets" class="btn btn-primary">Explore Sets</a>
+      </div>
+    </div>
+  </div>
+
+  <!--Cards -->
+  <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+    <!-- Card 1 -->
+    <div class="card bg-base-100 shadow-lg">
+      <figure>
+        <img src="https://cdn.rebrickable.com/media/sets/001-1.jpg" alt="Set 001-1" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">Set 001-1: Lego Building Set</h2>
+        <p>A classic Lego set that started it all.</p>
+        <a href="/lego/sets/001-1" class="btn btn-secondary">View Details</a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card bg-base-100 shadow-lg">
+      <figure>
+        <img src="https://cdn.rebrickable.com/media/sets/002-1.jpg" alt="Set 002-1" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">Set 002-1: Lego Train Set</h2>
+        <p>An early Lego train set for hours of fun.</p>
+        <a href="/lego/sets/002-1" class="btn btn-secondary">View Details</a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card bg-base-100 shadow-lg">
+      <figure>
+        <img src="https://cdn.rebrickable.com/media/sets/003-1.jpg" alt="Set 003-1" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">Set 003-1: Lego House Set</h2>
+        <p>Build your dream house with this set.</p>
+        <a href="/lego/sets/003-1" class="btn btn-secondary">View Details</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

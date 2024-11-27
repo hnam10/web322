@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <!-- Include Navbar -->
+    <%- include('partials/navbar', { page: "" }) %>
+
+        <!-- User History Section -->
+
+        <div class="user-history container">
+            <!-- Hero Section -->
+            <div class="hero">
+                <h1>
+                    <%= session.user.userName %>
+                </h1>
+            </div>
+            <br></br>
+            <div>
+                <p>User History: <%= session.user.email %>
+                </p>
+            </div>
+            <style>
+                /* 스타일은 user-history 컨테이너 안에서만 적용됩니다 */
+                .user-history {
+                    max-width: 800px;
+                    margin: 20px auto;
+                    background: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+
+                .user-history .hero {
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+
+                .user-history .hero h1 {
+                    font-size: 28px;
+                    color: #333;
+                }
+
+                .user-history .hero p {
+                    font-size: 16px;
+                    color: #555;
+                }
+
+                .user-history table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                .user-history table thead {
+                    background-color: #f9f9f9;
+                }
+
+                .user-history table th,
+                .user-history table td {
+                    text-align: left;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                }
+
+                .user-history table th {
+                    font-weight: bold;
+                }
+
+                .user-history table tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+            </style>
+
+
+
+            <!-- Login History Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Login Date/Time</th>
+                        <th>Client Information</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% session.user.loginHistory.forEach((history)=> { %>
+                        <tr>
+                            <td>
+                                <%= new Date(history.dateTime).toLocaleString() %>
+                            </td>
+                            <td>
+                                <%= history.userAgent %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+</body>
+
+</html>

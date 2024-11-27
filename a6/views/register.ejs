@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<style>
+    html, body {
+        height: 100%; /* 전체 높이를 설정 */
+        margin: 0; /* 기본 마진 제거 */
+    }
+
+    .hero-container {
+        min-height: 100%; /* 최소 높이를 전체 화면으로 설정 */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* 세로 중앙 정렬 */
+        align-items: center; /* 가로 중앙 정렬 */
+    }
+</style>
+<body class="bg-base-200">
+    <%- include('partials/navbar', { page: "" }) %>
+
+ 
+  <!-- HERO -->
+  <div class="hero bg-green-500 text-purple-700 p-10">
+    <div class="hero-content text-center">
+        <div class="max-w-md">
+
+        <h1 class="text-5xl font-bold">Register</h1>
+        <p class="py-6 text-gray-700">Please provide your credentials below</p>
+        </p>
+        <div class="flex gap-4 justify-center"></div>
+
+      <% if (successMessage) { %>
+        <!-- Success Message -->
+        <div class="alert alert-success flex items-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="ml-2"><%= successMessage %></span>
+        </div>
+        <a href="/login" class="btn btn-success w-full">PROCEED TO LOG IN</a>
+      <% } else { %>
+        <!-- Registration Form -->
+        <form action="/register" method="POST" class="space-y-4">
+          <div>
+            <label for="userName" class="block text-sm font-medium text-gray-700">User Name</label>
+            <input 
+              type="text" 
+              name="userName" 
+              id="userName" 
+              placeholder="User Name" 
+              required 
+              class="input input-bordered w-full"
+              value="<%= userName || '' %>">
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <input 
+              type="password" 
+              name="password" 
+              id="password" 
+              placeholder="Password" 
+              required 
+              class="input input-bordered w-full">
+          </div>
+          <div>
+            <label for="password2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <input 
+              type="password" 
+              name="password2" 
+              id="password2" 
+              placeholder="Confirm Password" 
+              required 
+              class="input input-bordered w-full">
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+            <input 
+              type="email" 
+              name="email" 
+              id="email" 
+              placeholder="Email Address" 
+              required 
+              class="input input-bordered w-full">
+          </div>
+          <% if (errorMessage) { %>
+            <div class="alert alert-error flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="ml-2"><%= errorMessage %></span>
+            </div>
+          <% } %>
+          <br></br>
+          <button type="submit" class="btn btn-primary w-full">Register</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

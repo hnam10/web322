@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= set.name %> - LEGO Set Details
+  </title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body class="bg-base-200">
+
+  <!-- Navbar -->
+  <%- include('partials/navbar', { page: "" }) %>
+
+    <!-- Hero -->
+    <div class="hero text-purple-700 p-10">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold">
+            <%= set.name %>
+          </h1>
+          <p class="py-6">Below, you will find detailed information about the set: <%= set.name %>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Set Details -->
+    <div class="p-10">
+      <div class="set-details">
+        <img src="<%= set.img_url %>" alt="<%= set.name %>" width="300">
+        <h2>
+          <%= set.name %>
+        </h2>
+        <p><strong>Year:</strong> <%= set.year %></p>
+        <p><strong>Theme:</strong> <%= set.Theme ? set.Theme.name : 'N/A' %></p> <!-- 수정된 부분: set.theme -> set.Theme.name -->
+        <p><strong>Number of Parts:</strong> <%= set.num_parts %></p>
+      </div>
+
+      <!-- Edit  Buttons -->
+       <% if (session.user) { %>
+        <div class="mt-6">
+          <a href="/lego/editSet/<%= set.set_num %>" class="btn btn-success">Edit Set</a>
+          </form>
+        </div>
+      </div>
+  
+  <%     } %>
+     
+    <!-- Quote Section -->
+    <div class="quote mt-10">
+      <h3>Quote of the Day</h3>
+      <blockquote id="quote-content">Loading...</blockquote>
+      <cite id="quote-author"></cite>
+    </div>
+
+    <!-- AJAX Script for Quote -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("https://quotable.io/random")
+          .then(response => response.json())
+          .then(data => {
+            document.getElementById("quote-content").innerText = data.content;
+            document.getElementById("quote-author").innerText = `- ${data.author}`;
+          })
+          .catch(error => console.error('Error fetching quote:', error));
+      });
+    </script>
+
+    <!-- Back Button -->
+    <a href="#" onclick="history.back(); return false;" class="btn">Go Back</a>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add New LEGO Set</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<style>
+  .navbar {
+    position: relative;
+    z-index: 10; /* navbar가 다른 요소 위에 오도록 설정 */
+  }
+
+  .hero {
+    position: relative;
+    z-index: 1; /* navbar보다 뒤에 위치하도록 설정 */
+  }
+</style>
+</head>
+<body class="bg-base-200">
+
+  <!-- Navbar -->
+  <%- include('partials/navbar', { page: "addSet" }) %>
+
+  <!-- Hero Section -->
+  <div class="hero text-purple-700 p-10">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-5xl font-bold">Add New LEGO Set</h1>
+        <p class="py-6">Enter the details of the new LEGO set below.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Set Form -->
+  <div class="p-10">
+    <form action="/lego/addSet" method="POST" class="form">
+      <div class="form-group">
+        <label for="set_num" class="label">Set Number:</label>
+        <input type="text" id="set_num" name="set_num" class="input input-bordered" required />
+      </div>
+
+      <div class="form-group mt-4">
+        <label for="set_name" class="label">Set Name:</label>
+        <input type="text" id="set_name" name="name" class="input input-bordered" required />
+      </div>
+
+      <div class="form-group mt-4">
+        <label for="set_year" class="label">Year:</label>
+        <input type="number" id="set_year" name="year" class="input input-bordered" required />
+      </div>
+
+      <div class="form-group mt-4">
+        <label for="set_num_parts" class="label">Number of Parts:</label>
+        <input type="number" id="set_num_parts" name="num_parts" class="input input-bordered" required />
+      </div>
+
+      <div class="form-group mt-4">
+        <label for="set_theme_id" class="label">Theme ID:</label>
+        <input type="number" id="set_theme_id" name="theme_id" class="input input-bordered" required />
+      </div>
+
+      <div class="form-group mt-4">
+        <label for="set_img_url" class="label">Image URL:</label>
+        <input type="text" id="set_img_url" name="img_url" class="input input-bordered" />
+      </div>
+
+      <div class="form-group mt-6">
+        <button type="submit" class="btn btn-primary">Add Set</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Back Button -->
+  <div class="mt-10">
+    <a href="/lego/sets" class="btn">Go Back to All Sets</a>
+  </div>
+
+</body>
+
+</html>
