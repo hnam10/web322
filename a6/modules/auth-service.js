@@ -42,17 +42,26 @@ function registerUser(userData) {
             return reject('Passwords do not match');
         }
 
-        bcrypt.hash(userData.password, 10).then(hash => { // Hash the password using a Salt that was generated using 10 rounds
-            // TODO: Store the resulting "hash" value in the DB
+        // bcrypt.hash(userData.password, 10).then(hash => { // Hash the password using a Salt that was generated using 10 rounds
+        //     // TODO: Store the resulting "hash" value in the DB
         
-            // new user object
-            const newUser = new User({
-                userName: userData.userName,
-                password: hash,
-                email: userData.email,
-                loginHistory: []
+        //     // new user object
+        //     const newUser = new User({
+        //         userName: userData.userName,
+        //         password: hash,
+        //         email: userData.email,
+        //         loginHistory: []
+        //     });
+            bcrypt.hash(userData.password, 10)
+            .then(hash => {
+                console.log("Hash generated successfully:", hash);
+                resolve(hash);
+            })
+            .catch(err => {
+                console.error("Error while hashing password:", err);
+                reject("There was an error encrypting the password");
             });
-
+        
             //save the user to the db
             newUser.save()
                 .then(() => resolve('User registered successfully'))
