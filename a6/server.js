@@ -50,9 +50,9 @@ function ensureLogin(req, res, next) {
 
 // LEGO 데이터 초기화
 legoData.initialize()
-  .then(async () => {
+  .then(() => {
     console.log("LEGO data initialized successfully");
-    await authData.initialize().then(()=> {
+    authData.initialize().then(()=> {
       console.log("Auth-service initialized successfully");
       app.listen(PORT, () => {
         console.log(`Server is running at http://localhost:${PORT}`);

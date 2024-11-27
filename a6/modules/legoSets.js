@@ -85,13 +85,13 @@ Set.belongsTo(Theme, { foreignKey: 'theme_id' });
 
 // 데이터베이스 초기화 함수
 function initialize() {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     console.log("Starting LEGO data initialization...");
 
     try {
       // 데이터 초기화 작업 (예: DB 연결 및 데이터 로드)
       console.log("Simulating LEGO data loading...");
-      await sequelize.sync();
+      sequelize.sync();
 
       // resolve(); 를 호출하여 초기화 완료 시 성공
       resolve();
