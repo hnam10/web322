@@ -17,24 +17,27 @@ const userSchema = new mongoose.Schema({
     ]
 });
 
-// initialize 함수
-function initialize() {
-    return new Promise(async (resolve, reject) => {
-        try {
-            // MongoDB 연결
-            const db = await mongoose.createConnection(process.env.MONGODB, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
 
-            // User 모델 초기화
-            User = db.model('users', userSchema);
-            console.log("MongoDB connected successfully and User model initialized.");
-            resolve(); // 성공 시 Promise resolve
-        } catch (err) {
+function initialize() {
+    return new Promise((resolve, reject) => {
+        // MongoDB 연결
+        const db = mongoose.createConnection(process.env.MONGODB, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+
+        // 에러 처리
+        db.on('error', (err) => {
             console.error("MongoDB connection error:", err);
             reject(err); // 연결 실패 시 Promise reject
-        }
+        });
+
+        // 연결 성공 시 User 모델 초기화
+        db.once('open', () => {
+            User = db.model('users', userSchema);
+            console.log("MongoDB connected successfully and User model initialized.");
+            resolve(); // 연결 성공 시 Promise resolve
+        });
     });
 }
 function registerUser(userData) {
