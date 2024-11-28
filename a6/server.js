@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // MongoDB 연결 설정
 const mongoose = require('mongoose');
-const dbURI = process.env.MONGO_URI; // 환경 변수 이름 통일
+const dbURI = process.env.MONGODB; // 환경 변수 이름 통일
 if (!dbURI) {
   throw new Error("MONGO_URI is not defined in environment variables");
 }
