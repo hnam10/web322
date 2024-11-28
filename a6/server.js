@@ -6,14 +6,6 @@
 * Name: Hansol Nam Student ID: 11302119 Date: Nov.16, 2024 *
 * Published URL: https://web322-x3ul.vercel.app/
 ********************************************************************************/
-/********************************************************************************
-* WEB322 – Assignment 05 *
-* I declare that this assignment is my own work in accordance with Seneca's
-* Academic Integrity Policy:
-* https://www.senecacollege.ca/about/policies/academic-integrity-policy.html *
-* Name: Hansol Nam Student ID: 11302119 Date: Nov.16, 2024 *
-* Published URL: https://web322-x3ul.vercel.app/
-********************************************************************************/
 
 // .env 파일은 로컬에서만 사용
 if (process.env.NODE_ENV !== 'production') {
@@ -22,9 +14,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 // MongoDB 연결 설정
 const mongoose = require('mongoose');
-const dbURI = process.env.MONGODB;
+const dbURI = process.env.MONGO_URI; // 환경 변수 이름 통일
 if (!dbURI) {
-  throw new Error("MONGODB is not defined in environment variables");
+  throw new Error("MONGO_URI is not defined in environment variables");
 }
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -121,12 +113,106 @@ initializeServices()
   });
 
 // Routes
-// ... (기존 Routes는 그대로 유지)
+
+// Home Route
 app.get('/', (req, res) => {
   res.render('home');
 });
 
-// 나머지 라우트도 동일하게 유지
+// About Route
+app.get('/about', (req, res) => {
+  res.render('about');
+});
+
+// Login Routes
+app.get('/login', (req, res) => {
+  res.render('login', { errorMessage: null, userName: null });
+});
+
+app.post('/login', (req, res) => {
+  req.body.userAgent = req.get('User-Agent');
+  authData.checkUser(req.body)
+    .then((user) => {
+      req.session.user = {
+        userName: user.userName,
+        email: user.email,
+        loginHistory: user.loginHistory,
+      };
+      res.redirect('/lego/sets');
+    })
+    .catch((err) => {
+      res.render('login', { errorMessage: err, userName: req.body.userName });
+    });
+});
+
+// Register Routes
+app.get('/register', (req, res) => {
+  res.render('register', { successMessage: null, errorMessage: null, userName: null });
+});
+
+app.post('/register', (req, res) => {
+  authData.registerUser(req.body)
+    .then(() => {
+      res.render('register', { successMessage: 'User created', errorMessage: null, userName: null });
+    })
+    .catch((err) => {
+      res.render('register', { successMessage: null, errorMessage: err, userName: req.body.userName });
+    });
+});
+
+// Logout Route
+app.get('/logout', (req, res) => {
+  req.session.reset();
+  res.redirect('/');
+});
+
+// User History Route (Protected)
+app.get('/userHistory', ensureLogin, (req, res) => {
+  res.render('userHistory', {
+    user: req.session.user,
+  });
+});
+
+// LEGO Routes
+app.get('/lego/sets', async (req, res) => {
+  const validThemes = ["technic", "star wars", "city"];
+  const theme = req.query.theme?.toLowerCase();
+
+  try {
+    let sets;
+    if (theme) {
+      if (!validThemes.includes(theme)) {
+        return res.status(404).render("404", { message: `No LEGO sets available for the theme "${theme}".` });
+      }
+      sets = await legoData.getSetsByTheme(theme);
+    } else {
+      sets = await legoData.getAllSets();
+      sets = sets.filter(set => set.Theme && validThemes.includes(set.Theme.name.toLowerCase()));
+    }
+
+    if (sets.length === 0) {
+      return res.status(404).render("404", { message: "No LEGO sets available for this theme." });
+    }
+
+    res.render("sets", { sets: sets, page: "/lego/sets", theme: theme, singleSet: false });
+  } catch (error) {
+    res.status(500).render("500", { message: "Unable to retrieve LEGO sets." });
+  }
+});
+
+app.get('/lego/sets/:set_num', async (req, res) => {
+  try {
+    const legoSet = await legoData.getSetByNum(req.params.set_num);
+    res.render('set', { set: legoSet });
+  } catch (err) {
+    console.error(`Error fetching LEGO set: ${err}`);
+    res.status(404).render('404', { message: 'LEGO set not found.' });
+  }
+});
+
+// 기타 라우트는 그대로 유지
+
+// 404 Page Not Found
 app.use((req, res) => {
   res.status(404).render('404', { message: 'Page not found.' });
 });
