@@ -107,24 +107,24 @@ initializeServices()
 // Routes
 
 
-// LEGO 데이터 초기화
-legoData.initialize()
-  .then(() => {
-    console.log("LEGO data initialized successfully");
-    authData.initialize().then(()=> {
-      console.log("Auth-service initialized successfully");
-      app.listen(PORT, () => {
-        console.log(`Server is running at http://localhost:${PORT}`);
-      });
-    })
-    .catch((err) => {
-      console.error(`Unable to start server: ${err}`);
-    });
-  })
-  .catch((err) => {
-    console.error(`Unable to start server: ${err}`);
-  });
-//Routes
+// // LEGO 데이터 초기화
+// legoData.initialize()
+//   .then(() => {
+//     console.log("LEGO data initialized successfully");
+//     authData.initialize().then(()=> {
+//       console.log("Auth-service initialized successfully");
+//       app.listen(PORT, () => {
+//         console.log(`Server is running at http://localhost:${PORT}`);
+//       });
+//     })
+//     .catch((err) => {
+//       console.error(`Unable to start server: ${err}`);
+//     });
+//   })
+//   .catch((err) => {
+//     console.error(`Unable to start server: ${err}`);
+//   });
+// //Routes
 
 // Home Route
 app.get('/', (req, res) => {
