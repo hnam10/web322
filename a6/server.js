@@ -52,31 +52,31 @@ let isDbConnected = false;
 let legoInitialized = false;
 let authInitialized = false;
 
-const initializeDatabase = async () => {
-  if (isDbConnected) {
-    console.log("Reusing existing MongoDB connection");
-    return;
-  }
+// const initializeDatabase = async () => {
+//   if (isDbConnected) {
+//     console.log("Reusing existing MongoDB connection");
+//     return;
+//   }
 
-  try {
-    const dbURI = process.env.MONGODB; // MongoDB 연결 문자열
-    if (!dbURI) throw new Error("MONGO_URI is not defined in environment variables");
+//   try {
+//     const dbURI = process.env.MONGODB; // MongoDB 연결 문자열
+//     if (!dbURI) throw new Error("MONGO_URI is not defined in environment variables");
 
-    await mongoose.connect(dbURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+//     await mongoose.connect(dbURI, {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     });
 
-    isDbConnected = true;
-    console.log("MongoDB connected successfully");
-  } catch (err) {
-    throw new Error(`MongoDB connection failed: ${err.message}`);
-  }
-};
+//     isDbConnected = true;
+//     console.log("MongoDB connected successfully");
+//   } catch (err) {
+//     throw new Error(`MongoDB connection failed: ${err.message}`);
+//   }
+// };
 
 const initializeServices = async () => {
   try {
-    await initializeDatabase(); // MongoDB 연결 초기화
+    // await initializeDatabase(); // MongoDB 연결 초기화
 
     if (!legoInitialized) {
       await legoData.initialize();
