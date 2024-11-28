@@ -277,4 +277,4 @@ app.get('/lego/deleteSet/:setNum', ensureLogin, async (req, res) => {
 app.use((req, res) => {
   res.status(404).render('404', { message: 'Page not found.' });
 });
-module.exports = app;
+
