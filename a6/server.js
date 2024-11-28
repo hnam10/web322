@@ -49,6 +49,8 @@ function ensureLogin(req, res, next) {
 }const mongoose = require('mongoose');
 
 let isDbConnected = false;
+let legoInitialized = false;
+let authInitialized = false;
 
 const initializeDatabase = async () => {
   if (isDbConnected) {
