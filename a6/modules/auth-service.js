@@ -17,39 +17,16 @@ const userSchema = new mongoose.Schema({
     ],
 });
 
-// MongoDB 연결 상태 관리
-let isDbConnected = false;
-
 function initialize() {
-    return new Promise((resolve, reject) => {
-        if (isDbConnected) {
-            console.log("Reusing existing MongoDB connection");
-            return resolve(); // 이미 연결된 경우 초기화 필요 없음
-        }
-
-        try {
-            const db = mongoose.createConnection(process.env.MONGODB, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
-
-            // 에러 처리
-            db.on('error', (err) => {
-                console.error("MongoDB connection error:", err);
-                reject(err); // 연결 실패 시 Promise reject
-            });
-
-            // 연결 성공 시 User 모델 초기화
-            db.once('open', () => {
-                User = db.model('users', userSchema);
-                isDbConnected = true; // 연결 상태 업데이트
-                console.log("MongoDB connected successfully and User model initialized.");
-                resolve(); // 연결 성공 시 Promise resolve
-            });
-        } catch (error) {
-            console.error("MongoDB initialization error:", error);
-            reject(error);
-        }
+    return new Promise(function (resolve, reject) {
+        let db = mongoose.createConnection(process.env.MONGODB);
+        db.on('error', (err) => {
+            reject(err); // reject the promise with the provided error
+        });
+        db.once('open', () => {
+            User = db.model("users", userSchema);
+            resolve();
+        });
     });
 }
 

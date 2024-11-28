@@ -46,85 +46,20 @@ function ensureLogin(req, res, next) {
     return res.redirect('/login'); // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
   }
   next();
-}const mongoose = require('mongoose');
+}
 
-let isDbConnected = false;
-let legoInitialized = false;
-let authInitialized = false;
-
-// const initializeDatabase = async () => {
-//   if (isDbConnected) {
-//     console.log("Reusing existing MongoDB connection");
-//     return;
-//   }
-
-//   try {
-//     const dbURI = process.env.MONGODB; // MongoDB 연결 문자열
-//     if (!dbURI) throw new Error("MONGO_URI is not defined in environment variables");
-
-//     await mongoose.connect(dbURI, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     });
-
-//     isDbConnected = true;
-//     console.log("MongoDB connected successfully");
-//   } catch (err) {
-//     throw new Error(`MongoDB connection failed: ${err.message}`);
-//   }
-// };
-
-const initializeServices = async () => {
-  try {
-    // await initializeDatabase(); // MongoDB 연결 초기화
-
-    if (!legoInitialized) {
-      await legoData.initialize();
-      legoInitialized = true;
-      console.log("LEGO data initialized successfully");
-    }
-
-    if (!authInitialized) {
-      await authData.initialize();
-      authInitialized = true;
-      console.log("Auth-service initialized successfully");
-    }
-  } catch (err) {
-    throw new Error(`Service initialization failed: ${err.message}`);
-  }
-};
-
-initializeServices()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running at http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error(`Unable to start server: ${err.message}`);
-  });
 
 // Routes
 
-
-// // LEGO 데이터 초기화
-// legoData.initialize()
-//   .then(() => {
-//     console.log("LEGO data initialized successfully");
-//     authData.initialize().then(()=> {
-//       console.log("Auth-service initialized successfully");
-//       app.listen(PORT, () => {
-//         console.log(`Server is running at http://localhost:${PORT}`);
-//       });
-//     })
-//     .catch((err) => {
-//       console.error(`Unable to start server: ${err}`);
-//     });
-//   })
-//   .catch((err) => {
-//     console.error(`Unable to start server: ${err}`);
-//   });
-// //Routes
+legoData.initialize()
+  .then(authData.initialize)
+  .then(function () {
+    app.listen(HTTP_PORT, function () {
+      console.log(`app listening on: ${HTTP_PORT}`);
+    });
+  }).catch(function (err) {
+    console.log(`unable to start server: ${err}`);
+  });
 
 // Home Route
 app.get('/', (req, res) => {
@@ -189,7 +124,7 @@ app.get('/userHistory', ensureLogin, (req, res) => {
 
 app.get('/lego/sets', async (req, res) => {
   const validThemes = ["technic", "star wars", "city"]; // 허용된 theme 값
-const theme = req.query.theme?.toLowerCase(); // 소문자로 변환하여 비교
+  const theme = req.query.theme?.toLowerCase(); // 소문자로 변환하여 비교
 
   try {
     let sets;
