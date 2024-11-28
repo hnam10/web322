@@ -24,6 +24,7 @@ function initialize() {
             reject(err); // reject the promise with the provided error
         });
         db.once('open', () => {
+            console.log("mongo connected")
             User = db.model("users", userSchema);
             resolve();
         });

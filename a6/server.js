@@ -54,8 +54,8 @@ function ensureLogin(req, res, next) {
 legoData.initialize()
   .then(authData.initialize)
   .then(function () {
-    app.listen(HTTP_PORT, function () {
-      console.log(`app listening on: ${HTTP_PORT}`);
+    app.listen(PORT, function () {
+      console.log(`app listening on: ${PORT}`);
     });
   }).catch(function (err) {
     console.log(`unable to start server: ${err}`);
